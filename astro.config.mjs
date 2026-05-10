@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://solfy.net', // Update with actual production domain
+  site: 'https://solfy.puregrid.es', // Update with actual production domain
   integrations: [
     tailwind({
       applyBaseStyles: false,
