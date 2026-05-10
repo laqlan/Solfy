@@ -10,6 +10,7 @@ export default defineConfig({
     }),
     // sitemap() can be enabled once the site URL is properly configured
   ],
+  outDir: 'docs',
   build: {
     inlineStylesheets: 'auto',
   },
