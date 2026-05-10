@@ -1,0 +1,128 @@
+---
+/**
+ * BaseLayout - main layout wrapper for all pages.
+ * Provides HTML structure, imports global styles, includes BaseHead for SEO,
+ * and wraps content with Header and Footer components.
+ * 
+ * Every page should use this layout for consistency.
+ */
+
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { translations } from '@data/translations';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  structuredData?: object;
+}
+
+const { title, description, ogImage, structuredData } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead 
+      title={title} 
+      description={description} 
+      ogImage={ogImage}
+      structuredData={structuredData}
+    />
+  </head>
+  <body>
+    <Header />
+    
+    <main id="main-content">
+      <slot />
+    </main>
+    
+    <Footer />
+
+    <script is:inline define:vars={{ translations }}>
+      const TRANSLATIONS = translations;
+      const DEFAULT_LANGUAGE = 'es';
+
+      const getStoredLanguage = () => {
+        const stored = window.localStorage.getItem('siteLanguage');
+        return stored && TRANSLATIONS[stored] ? stored : DEFAULT_LANGUAGE;
+      };
+
+      const resolveTranslation = (lang, key) => {
+        if (!lang || !key) return null;
+        return key.split('.').reduce((obj, part) => obj?.[part], TRANSLATIONS[lang]);
+      };
+
+      const applyLanguage = (lang) => {
+        console.log('Applying language:', lang);
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll('[data-i18n]').forEach((element) => {
+          const key = element.getAttribute('data-i18n');
+          const translation = resolveTranslation(lang, key);
+          console.log('Translating', key, 'to', translation);
+          if (translation !== undefined && translation !== null) {
+            element.innerHTML = translation;
+          }
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach((input) => {
+          const key = input.getAttribute('data-i18n-placeholder');
+          const translation = resolveTranslation(lang, key);
+          if (translation) {
+            input.placeholder = translation;
+          }
+        });
+
+        document.querySelectorAll('[data-i18n-value]').forEach((element) => {
+          const key = element.getAttribute('data-i18n-value');
+          const translation = resolveTranslation(lang, key);
+          if (translation) {
+            element.value = translation;
+          }
+        });
+
+        const syncSelect = (select) => {
+          if (select) select.value = lang;
+        };
+
+        syncSelect(document.getElementById('language-select'));
+        syncSelect(document.getElementById('language-select-mobile'));
+      };
+
+      const setLanguage = (lang) => {
+        if (!TRANSLATIONS[lang]) return;
+        window.localStorage.setItem('siteLanguage', lang);
+        applyLanguage(lang);
+      };
+
+      const initLanguageSwitcher = () => {
+        console.log('Initializing language switcher...');
+        const languageSelect = document.getElementById('language-select');
+        const mobileLanguageSelect = document.getElementById('language-select-mobile');
+        console.log('Selectors found:', languageSelect, mobileLanguageSelect);
+        const initialLang = getStoredLanguage();
+        console.log('Initial language:', initialLang);
+
+        applyLanguage(initialLang);
+
+        [languageSelect, mobileLanguageSelect].forEach((select) => {
+          if (!select) return;
+          select.addEventListener('change', (event) => {
+            console.log('Language changed to:', event.target.value);
+            setLanguage(event.target.value);
+          });
+        });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLanguageSwitcher);
+      } else {
+        initLanguageSwitcher();
+      }
+    </script>
+  </body>
+</html>

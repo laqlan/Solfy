@@ -1,0 +1,41 @@
+---
+/**
+ * CTAFinal component - final call-to-action section before footer.
+ * Large gradient card with compelling final message.
+ */
+---
+
+<section class="py-16 md:py-24 bg-bg">
+  <div class="container-custom">
+    <div class="relative overflow-hidden rounded-[36px] p-14 md:p-22 text-center shadow-lift" style="background: linear-gradient(135deg, #f2e788 0%, #c5dec0 50%, #a6d6e0 100%);">
+      {/* Background gradient orbs */}
+      <div class="absolute top-[-40%] right-[-10%] w-[400px] h-[400px] pointer-events-none" style="background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 60%);"></div>
+      <div class="absolute bottom-[-40%] left-[-10%] w-[400px] h-[400px] pointer-events-none" style="background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 60%);"></div>
+
+      {/* Content */}
+      <div class="relative z-10 max-w-[720px] mx-auto">
+        <h2 class="font-serif text-[clamp(2.2rem,6vw,3.8rem)] font-normal leading-[1.05] tracking-tight mb-5 text-ink" data-i18n="ctaFinal.title">
+          Empieza con un <em class="italic underline decoration-ink/40 decoration-2 underline-offset-[6px]">estudio gratuito</em>.<br />
+          Sin compromiso, sin tecnicismos.
+        </h2>
+        
+        <p class="text-ink-soft text-lg mb-10 leading-relaxed" data-i18n="ctaFinal.description">
+          Cuéntanos un poco sobre tu hogar y te llamamos en menos de 24 horas con una propuesta clara y a tu medida.
+        </p>
+        
+        <a 
+          href="/contact" 
+          class="inline-flex items-center gap-2.5 bg-ink text-bg px-9 py-4 rounded-pill font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden group"
+          data-i18n="ctaFinal.button"
+        >
+          <span class="absolute inset-0 bg-bg opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+          <span class="relative z-10 group-hover:text-ink transition-colors">Solicitar mi estudio</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="relative z-10" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

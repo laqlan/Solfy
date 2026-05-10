@@ -1,0 +1,84 @@
+---
+/**
+ * BaseHead component - handles all SEO meta tags, Open Graph, Twitter cards, and JSON-LD.
+ * Every page must use this component to ensure proper SEO and social sharing.
+ * 
+ * Props:
+ * - title: Page title (appended with site name)
+ * - description: Meta description for search engines
+ * - ogImage: Open Graph image URL (defaults to site OG image)
+ * - canonicalURL: Canonical URL for this page
+ * - structuredData: Optional JSON-LD structured data object
+ */
+
+import { siteConfig, organizationSchema } from '@data/siteConfig';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  structuredData?: object;
+}
+
+const {
+  title,
+  description,
+  ogImage = siteConfig.ogImage,
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  structuredData,
+} = Astro.props;
+
+const fullTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+const ogImageURL = new URL(ogImage, Astro.site).href;
+---
+
+<!-- Essential meta tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content={description} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:site_name" content={siteConfig.name} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+{siteConfig.social.twitter && (
+  <meta name="twitter:site" content={siteConfig.social.twitter} />
+)}
+
+<!-- Page title -->
+<title>{fullTitle}</title>
+
+<!-- Preload primary font for performance -->
+<link
+  rel="preload"
+  href="/node_modules/@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<!-- Favicon (add actual favicon files to public/) -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+{structuredData && (
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+)}

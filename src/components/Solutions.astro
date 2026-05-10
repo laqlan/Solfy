@@ -1,0 +1,85 @@
+---
+/**
+ * Solutions component - displays the three main solution categories.
+ * Uses data from solutions.ts for content and icons.
+ */
+
+import { solutions } from '@data/solutions';
+
+// SVG icons map
+const icons = {
+  home: '<path d="M4 14L16 4l12 10v14H4V14z"/><path d="M11 28v-8h10v8"/>',
+  building: '<rect x="4" y="10" width="10" height="18" rx="1"/><rect x="18" y="6" width="10" height="22" rx="1"/><line x1="7" y1="14" x2="11" y2="14"/><line x1="7" y1="18" x2="11" y2="18"/><line x1="7" y1="22" x2="11" y2="22"/><line x1="21" y1="11" x2="25" y2="11"/><line x1="21" y1="16" x2="25" y2="16"/><line x1="21" y1="21" x2="25" y2="21"/>',
+  factory: '<path d="M3 28V14l8-6 8 6v14"/><path d="M19 28V18h10v10"/>',
+};
+---
+
+<section id="solutions" class="py-20 md:py-28 bg-bg">
+  <div class="container-custom">
+    <!-- Section heading -->
+    <div class="section-head">
+      <div class="eyebrow">
+        <span data-i18n="solutions.eyebrow">Soluciones</span>
+      </div>
+      <h2 class="font-serif text-[clamp(2.2rem,5vw,3.5rem)] font-normal leading-[1.05] tracking-tight text-ink mb-5" data-i18n="solutions.heading">
+        Una solución para cada <em class="italic gradient-text">tipo de hogar</em>.
+      </h2>
+      <p class="text-lg text-ink-soft leading-relaxed" data-i18n="solutions.description">
+        Desde una vivienda unifamiliar hasta una nave industrial — diseñamos la instalación que más se adapta a tu consumo, tu cubierta y tu presupuesto.
+      </p>
+    </div>
+
+    <!-- Solutions grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {solutions.map((solution, index) => (
+        <article class="bg-bg-soft rounded-card p-9 relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift cursor-pointer group">
+          {/* Top gradient bar - animated on hover */}
+          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-brand scale-x-0 origin-left transition-transform duration-400 group-hover:scale-x-100"></div>
+          
+          {/* Icon */}
+          <div class="w-16 h-16 rounded-2xl bg-bg flex items-center justify-center mb-6 shadow-sm">
+            <svg 
+              viewBox="0 0 32 32" 
+              fill="none" 
+              stroke-width="1.5" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="w-8 h-8 transition-transform duration-300 group-hover:scale-110"
+              style={`stroke: ${solution.iconColor}`}
+              aria-hidden="true"
+              set:html={icons[solution.icon]}
+            />
+          </div>
+
+          {/* Number */}
+          <span class="font-serif italic text-base text-brand-sage-deep mb-6 block font-normal">
+            — {solution.number}
+          </span>
+
+          {/* Title */}
+          <h3 class="font-serif text-[1.65rem] font-normal leading-tight tracking-tight mb-3 text-ink" data-i18n={`solutions.${solution.id}.title`}>
+            {solution.title}
+          </h3>
+
+          {/* Description */}
+          <p class="text-[0.95rem] text-ink-soft leading-relaxed mb-6" data-i18n={`solutions.${solution.id}.description`}>
+            {solution.description}
+          </p>
+
+          {/* Link */}
+          <a 
+            href={solution.link} 
+            class="inline-flex items-center gap-2 text-ink no-underline text-sm font-semibold border-b-[1.5px] border-ink pb-0.5 transition-all group-hover:text-brand-sage-deep group-hover:border-brand-sage-deep group-hover:gap-3"
+            data-i18n="solutions.link"
+          >
+            Ver detalle
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

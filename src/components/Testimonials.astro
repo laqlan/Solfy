@@ -1,0 +1,56 @@
+---
+/**
+ * Testimonials component - customer reviews showcase.
+ * Uses testimonials data with ratings and customer information.
+ */
+
+import { testimonials } from '@data/testimonials';
+---
+
+<section id="testimonials" class="py-20 md:py-28 bg-bg overflow-hidden">
+  <div class="container-custom">
+    <!-- Section heading -->
+    <div class="section-head">
+      <div class="eyebrow">
+        <span data-i18n="testimonials.eyebrow">Clientes reales</span>
+      </div>
+      <h2 class="font-serif text-[clamp(2.2rem,5vw,3.5rem)] font-normal leading-[1.05] tracking-tight text-ink mb-5" data-i18n="testimonials.title">
+        Más de <em class="italic gradient-text">2.000 hogares</em> ya generan su propia energía.
+      </h2>
+    </div>
+
+    <!-- Testimonials grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {testimonials.map((testimonial) => (
+        <article class="bg-bg-soft rounded-card p-8 relative transition-all duration-300 hover:-translate-y-1 hover:shadow-soft">
+          {/* Star rating */}
+          <div class="mb-4 text-[0.95rem] tracking-[0.1em] gradient-text font-bold">
+            {'★'.repeat(testimonial.rating)}
+          </div>
+
+          {/* Quote text */}
+          <blockquote class="font-serif text-lg leading-relaxed text-ink mb-6 font-normal">
+            "{testimonial.content}"
+          </blockquote>
+
+          {/* Author info */}
+          <div class="flex items-center gap-3 pt-5 border-t border-line">
+            {/* Avatar circle with initial */}
+            <div class="w-10 h-10 rounded-full bg-gradient-brand text-ink flex items-center justify-center font-serif font-normal text-lg">
+              {testimonial.author.initial}
+            </div>
+            
+            <div>
+              <div class="text-sm font-semibold text-ink leading-tight">
+                {testimonial.author.name}
+              </div>
+              <div class="text-xs text-ink-mute mt-0.5">
+                {testimonial.author.type} · {testimonial.author.location}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

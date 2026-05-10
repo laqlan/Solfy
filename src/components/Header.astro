@@ -1,0 +1,160 @@
+---
+/**
+ * Header component - site-wide navigation bar.
+ * Sticky header with logo, navigation links, and CTA button.
+ * Mobile menu is handled by MobileNav component.
+ */
+---
+
+<header class="sticky top-0 z-[100] bg-bg/85 backdrop-blur-xl border-b border-line-soft">
+  <div class="container-custom">
+    <nav class="flex items-center justify-between py-4 gap-4" aria-label="Main navigation">
+      <!-- Logo -->
+      <a href="/" class="inline-flex items-center gap-3 no-underline text-ink group" aria-label="Solfy">
+        <svg class="h-10 w-auto" viewBox="0 0 950 300" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d4f767" />
+              <stop offset="100%" stop-color="#9ad4ff" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#logoGradient)" d="M 382.59961 8.4003906 C 336.39966 8.4003906 298.69922 45.799265 298.69922 91.699219 L 298.69922 164 C 298.69922 171.79999 305.00079 178.09961 312.80078 178.09961 C 320.60077 178.09961 327 171.69999 327 164 L 327 91.800781 C 327 61.400812 351.99925 36.699219 382.69922 36.699219 C 411.29919 36.699219 434.9 58.200809 438 85.800781 L 438.5 276.19922 C 438.5 279.59922 439.59922 282.70078 441.69922 285.30078 C 441.89922 285.50078 442.09922 285.70039 442.19922 285.90039 C 442.39922 286.20039 442.60039 286.39961 442.90039 286.59961 C 445.90039 289.59961 449.4 291 453.5 291 L 582.30078 290.69922 L 582.5 290.69922 C 586.6 290.69922 590.09961 289.20078 593.09961 286.30078 C 596.09961 283.30078 597.5 279.79921 597.5 275.69922 C 597.5 271.59922 595.99961 268.09961 593.09961 265.09961 C 589.99961 262.19961 586.50039 260.69922 582.40039 260.69922 L 582.19922 260.69922 L 468.59961 261 L 468.5 261 L 466.59961 86.900391 C 466.49961 86.500391 466.39922 85.90039 466.19922 85.400391 C 462.89922 42.400434 426.69957 8.4003906 382.59961 8.4003906 z M 796 71.099609 C 792 71.099609 788.3 72.400003 785 75 C 781.7 77.599997 780 80.999613 780 85.099609 C 780 88.499606 780.80039 91.399221 782.40039 93.699219 L 846 201.5 L 845 278 L 845 278.30078 C 845 282.30078 846.50039 285.69961 849.40039 288.59961 C 852.40039 291.49961 855.9 292.90039 860 292.90039 C 864.1 292.90039 867.59961 291.49961 870.59961 288.59961 C 873.59961 285.69961 875 282.30078 875 278.30078 L 876 203.5 L 939.90039 95 C 941.40039 92.500002 942.09961 89.600387 942.09961 86.400391 C 942.29961 82.900394 940.89961 79.699216 938.09961 76.699219 C 936.09961 74.599221 934.20078 73.30039 932.30078 72.900391 C 930.40078 72.500391 928.39961 72.199219 926.09961 72.199219 C 923.69961 72.199219 921.39961 73.000002 919.09961 74.5 C 916.89961 75.999999 915.19922 77.59922 914.19922 79.199219 L 861.69922 170.69922 L 808 78.300781 C 805.2 73.500786 801.19999 71.099609 796 71.099609 z M 96.5 71.599609 C 86.60001 71.599609 76.599599 73.000784 66.599609 75.800781 C 56.599619 78.600778 47.399992 82.699224 39 88.199219 C 30.600008 93.699213 23.900386 100.40079 18.900391 108.30078 C 13.800396 116.30077 11.300781 125.5004 11.300781 135.90039 C 11.300781 147.70038 14.500007 157.49962 21 165.09961 C 27.499993 172.7996 34.599617 178.59961 42.599609 182.59961 C 51.8996 187.2996 61.89923 190.50078 72.699219 192.30078 C 83.399208 194.10078 94.200011 195.70078 105 197.30078 C 115.79999 198.90078 126.00001 201.70079 135.5 205.80078 C 139.7 207.60078 143.59961 210.19922 147.09961 213.69922 C 150.69961 217.19922 152.40039 221.50079 152.40039 226.80078 C 152.40039 235.10077 149.4996 242.00079 143.59961 247.30078 C 137.69962 252.70078 130.50038 256.59922 121.90039 259.19922 C 113.3004 261.79922 104.69921 263 96.199219 263 C 82.599232 263 70.49999 260.09921 60 254.19922 C 49.500011 248.29922 41.999605 240.29921 37.599609 230.19922 C 36.59961 227.59922 34.699997 225.39922 32 223.69922 C 29.300003 221.89922 26.499216 221.09961 23.699219 221.09961 C 19.599223 221.09961 16.099606 222.6 13.099609 225.5 C 10.099612 228.5 8.6992188 231.99961 8.6992188 236.09961 C 8.6992188 238.09961 9.0996104 240.09961 10.099609 242.09961 C 14.599605 252.3996 21.099618 261.39962 29.599609 269.09961 C 38.099601 276.7996 48.100011 282.70079 59.5 286.80078 C 70.899989 291.00078 83.099232 293 96.199219 293 C 105.79921 293 115.69923 291.60039 125.69922 288.90039 C 135.79921 286.10039 145.09923 281.99999 153.69922 276.5 C 162.29921 271.00001 169.29961 264.10077 174.59961 255.80078 C 179.8996 247.50079 182.59961 237.80077 182.59961 226.80078 C 182.59961 218.30079 180.9 210.8996 177.5 204.59961 C 174.2 198.19962 169.80039 192.80039 164.40039 188.40039 C 159.0004 184.0004 153.30038 180.5 147.40039 178 C 138.1004 174 127.99921 171.19961 117.19922 169.59961 C 106.39923 167.99961 95.699599 166.29961 85.099609 164.59961 C 74.49962 162.89961 64.89921 159.89961 56.199219 155.59961 C 52.499222 153.69961 49.099606 151.09922 46.099609 147.69922 C 43.099612 144.29922 41.599609 140.40078 41.599609 135.80078 C 41.599609 130.10079 43.400394 125.10078 46.900391 120.80078 C 50.400387 116.50079 54.999615 112.89961 60.599609 110.09961 C 66.199604 107.19961 72.199616 105.09922 78.599609 103.69922 C 84.999603 102.29922 90.999224 101.59961 96.699219 101.59961 C 108.29921 101.59961 118.6004 104.20079 127.40039 109.30078 C 136.30038 114.40078 142.60039 121.3004 146.40039 129.90039 C 147.50039 132.40039 149.39961 134.50078 152.09961 136.30078 C 154.79961 138.10078 157.49922 138.90039 160.19922 138.90039 C 164.29921 138.90039 167.80078 137.4 170.80078 134.5 C 173.80078 131.5 175.19922 128.00039 175.19922 123.90039 C 175.19922 121.80039 174.70078 119.69922 173.80078 117.69922 C 169.80079 108.59923 163.89921 100.59921 156.19922 93.699219 C 148.49923 86.799226 139.49921 81.399996 129.19922 77.5 C 118.89923 73.600004 107.99999 71.599609 96.5 71.599609 z M 750 74.199219 L 627.5 74.400391 C 623.4 74.400391 619.90039 75.799222 616.90039 78.699219 C 613.90039 81.599216 612.5 84.999613 612.5 89.099609 L 612.90039 276.80078 L 612.90039 276.90039 C 612.90039 280.90039 614.40078 284.40078 617.30078 287.30078 C 620.30078 290.20078 623.80039 291.69922 627.90039 291.69922 C 632.00039 291.69922 635.5 290.20078 638.5 287.30078 C 641.5 284.40078 642.90039 280.90039 642.90039 276.90039 L 642.90039 276.59961 L 642.69922 189.09961 L 721 188.30078 C 725.4 188.30078 729.00078 186.69961 731.80078 183.59961 C 734.60078 180.39923 736 176.70078 736 172.40039 C 736 169.40039 734.69922 166.29961 732.19922 163.09961 C 729.69922 159.89961 726.40039 158.30078 722.40039 158.30078 L 721 158.30078 L 642.69922 159.09961 L 642.5 104.40039 L 750 104.19922 L 750.19922 104.19922 C 754.29921 104.19922 757.80078 102.70078 760.80078 99.800781 C 763.80078 96.800784 765.19922 93.299215 765.19922 89.199219 C 765.19922 85.099223 763.70078 81.599606 760.80078 78.599609 C 757.80078 75.699612 754.19961 74.199219 750.09961 74.199219 L 750 74.199219 z M 272.90039 79 C 271.50039 79.599999 269.99922 79.999219 268.69922 80.699219 C 255.89923 86.599213 244.80077 94.79962 235.30078 105.09961 C 225.80079 115.4996 218.49921 127.29962 213.19922 140.59961 C 207.89922 153.8996 205.30078 168.10001 205.30078 183 C 205.30078 198.29998 207.80079 212.69962 212.80078 226.09961 C 217.80078 239.4996 224.89923 251.3004 234.19922 261.40039 C 243.49921 271.60038 254.60001 279.50079 267.5 285.30078 C 280.39999 291.10078 294.79963 293.90039 310.59961 293.90039 C 326.09959 293.90039 340.29923 291.00078 353.19922 285.30078 C 366.09921 279.60079 377.19962 271.6996 386.59961 261.59961 C 395.9996 251.49962 403.30001 239.79999 408.5 226.5 C 413.69999 213.20001 416.19922 199.00038 416.19922 183.90039 C 416.19922 168.80041 413.60039 154.49999 408.40039 141 C 403.3004 127.50001 395.90038 115.59921 386.40039 105.19922 C 376.9004 94.799229 365.70077 86.699213 352.80078 80.699219 C 352.00078 80.399219 351.3 80.100781 350.5 79.800781 L 346.59961 112.19922 C 347.49961 112.69922 348.40078 113.09922 349.30078 113.69922 C 360.70077 121.29921 369.79962 131.50079 376.59961 144.30078 C 383.3996 157.10077 386.69922 171.2008 386.69922 186.80078 C 386.69922 196.40077 384.69921 205.80001 380.69922 215 C 376.69922 224.19999 371.1996 232.39923 364.09961 239.69922 C 356.99962 246.99921 348.90077 252.79961 339.80078 257.09961 C 330.60079 261.39961 320.8996 263.59961 310.59961 263.59961 C 300.29962 263.59961 290.59999 261.50039 281.5 257.40039 C 272.40001 253.20039 264.39999 247.50077 257.5 240.30078 C 250.60001 233.00079 245.20078 224.70038 241.30078 215.40039 C 237.40079 206.1004 235.40039 196.2996 235.40039 186.09961 C 235.40039 171.09962 238.59962 157.19999 245.09961 144.5 C 251.5996 131.80001 260.5004 121.60038 271.90039 113.90039 C 273.20039 113.00039 274.50078 112.39961 275.80078 111.59961 L 272.90039 79 z " />
+        <span class="sr-only">Solfy</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden lg:flex gap-8 list-none m-0">
+        <li><a href="/#solutions" data-i18n="header.nav.solutions" class="text-ink no-underline text-sm font-medium hover:text-brand-sage-deep transition-colors relative after:absolute after:left-0 after:-bottom-1.5 after:w-0 after:h-0.5 after:bg-gradient-brand after:rounded-sm after:transition-all hover:after:w-full">Soluciones</a></li>
+        <li><a href="/#method" data-i18n="header.nav.method" class="text-ink no-underline text-sm font-medium hover:text-brand-sage-deep transition-colors relative after:absolute after:left-0 after:-bottom-1.5 after:w-0 after:h-0.5 after:bg-gradient-brand after:rounded-sm after:transition-all hover:after:w-full">Cómo trabajamos</a></li>
+        <li><a href="/#coverage" data-i18n="header.nav.coverage" class="text-ink no-underline text-sm font-medium hover:text-brand-sage-deep transition-colors relative after:absolute after:left-0 after:-bottom-1.5 after:w-0 after:h-0.5 after:bg-gradient-brand after:rounded-sm after:transition-all hover:after:w-full">Dónde llegamos</a></li>
+        <li><a href="/#faq" data-i18n="header.nav.faq" class="text-ink no-underline text-sm font-medium hover:text-brand-sage-deep transition-colors relative after:absolute after:left-0 after:-bottom-1.5 after:w-0 after:h-0.5 after:bg-gradient-brand after:rounded-sm after:transition-all hover:after:w-full">Dudas frecuentes</a></li>
+        <li><a href="/#testimonials" data-i18n="header.nav.testimonials" class="text-ink no-underline text-sm font-medium hover:text-brand-sage-deep transition-colors relative after:absolute after:left-0 after:-bottom-1.5 after:w-0 after:h-0.5 after:bg-gradient-brand after:rounded-sm after:transition-all hover:after:w-full">Clientes</a></li>
+      </ul>
+
+      <!-- Right side actions -->
+      <div class="flex items-center gap-3">
+        <div class="hidden lg:flex items-center gap-2">
+          <label for="language-select" class="sr-only" data-i18n="header.language">Idioma</label>
+          <select id="language-select" class="border border-line px-3 py-2 rounded-pill bg-bg text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand-sage-deep transition-colors">
+            <option value="es">Español</option>
+            <option value="ca">Català</option>
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="ru">Русский</option>
+          </select>
+        </div>
+
+        <!-- CTA Button (hidden on mobile) -->
+        <a href="/contact" data-i18n="header.cta" class="hidden md:inline-flex bg-gradient-brand text-ink no-underline px-5 py-3 rounded-pill text-sm font-semibold transition-all hover:-translate-y-0.5 hover:brightness-105 whitespace-nowrap">
+          Estudio gratuito
+        </a>
+
+        <!-- Mobile menu toggle -->
+        <button 
+          id="mobile-menu-toggle" 
+          class="lg:hidden bg-bg-soft border-0 w-10 h-10 rounded-pill flex items-center justify-center cursor-pointer flex-col gap-1"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+        >
+          <span class="w-4 h-0.5 bg-ink rounded-sm"></span>
+          <span class="w-4 h-0.5 bg-ink rounded-sm"></span>
+          <span class="w-4 h-0.5 bg-ink rounded-sm"></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile Navigation Overlay -->
+<aside 
+  id="mobile-nav" 
+  class="fixed top-0 -right-full w-[88%] max-w-[360px] h-screen bg-bg z-[200] pt-20 px-8 pb-8 transition-all duration-[350ms] ease-out overflow-y-auto shadow-2xl"
+  role="dialog"
+  aria-label="Mobile navigation"
+  aria-hidden="true"
+>
+  <button 
+    id="mobile-close" 
+    class="absolute top-6 right-6 bg-bg-soft border-0 text-2xl cursor-pointer text-ink w-10 h-10 rounded-pill flex items-center justify-center"
+    aria-label="Cerrar menú"
+  >
+    ×
+  </button>
+  
+  <nav>
+    <ul class="list-none m-0 p-0">
+      <li class="border-b border-line-soft">
+        <a href="/#solutions" class="block py-5 text-ink no-underline font-serif text-2xl font-normal tracking-tight">Soluciones</a>
+      </li>
+      <li class="border-b border-line-soft">
+        <a href="/#method" class="block py-5 text-ink no-underline font-serif text-2xl font-normal tracking-tight">Cómo trabajamos</a>
+      </li>
+      <li class="border-b border-line-soft">
+        <a href="/#coverage" class="block py-5 text-ink no-underline font-serif text-2xl font-normal tracking-tight">Dónde llegamos</a>
+      </li>
+      <li class="border-b border-line-soft">
+        <a href="/#faq" class="block py-5 text-ink no-underline font-serif text-2xl font-normal tracking-tight">Dudas frecuentes</a>
+      </li>
+      <li class="border-b border-line-soft">
+        <a href="/#testimonials" class="block py-5 text-ink no-underline font-serif text-2xl font-normal tracking-tight">Clientes</a>
+      </li>
+      <li class="border-b border-line-soft">
+        <a href="/contact" class="block py-5 text-ink no-underline font-serif text-2xl font-normal tracking-tight" data-i18n="header.cta">Estudio gratuito</a>
+      </li>
+    </ul>
+
+    <div class="mt-8">
+      <label for="language-select-mobile" class="block text-sm font-medium text-ink mb-2" data-i18n="header.language">Idioma</label>
+      <select id="language-select-mobile" class="w-full border border-line px-3 py-3 rounded-2xl bg-bg text-ink focus:outline-none focus:ring-2 focus:ring-brand-sage-deep transition-colors">
+        <option value="es">Español</option>
+        <option value="ca">Català</option>
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="ru">Русский</option>
+      </select>
+    </div>
+  </nav>
+</aside>
+
+<!-- Scrim/Backdrop -->
+<div 
+  id="mobile-scrim" 
+  class="fixed inset-0 bg-ink/35 z-[150] opacity-0 invisible transition-all duration-300 backdrop-blur-sm"
+  aria-hidden="true"
+></div>
+
+<script>
+  // Mobile menu interaction - minimal client-side JS
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const nav = document.getElementById('mobile-nav');
+  const close = document.getElementById('mobile-close');
+  const scrim = document.getElementById('mobile-scrim');
+  const navLinks = nav?.querySelectorAll('a');
+
+  function openNav() {
+    nav?.classList.remove('-right-full');
+    nav?.classList.add('right-0');
+    nav?.setAttribute('aria-hidden', 'false');
+    scrim?.classList.remove('invisible', 'opacity-0');
+    scrim?.classList.add('visible', 'opacity-100');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    nav?.classList.add('-right-full');
+    nav?.classList.remove('right-0');
+    nav?.setAttribute('aria-hidden', 'true');
+    scrim?.classList.add('invisible', 'opacity-0');
+    scrim?.classList.remove('visible', 'opacity-100');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle?.addEventListener('click', openNav);
+  close?.addEventListener('click', closeNav);
+  scrim?.addEventListener('click', closeNav);
+  navLinks?.forEach(link => link.addEventListener('click', closeNav));
+</script>

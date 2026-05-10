@@ -1,0 +1,116 @@
+---
+/**
+ * About page - company information, method, and story.
+ * Demonstrates how to create a new page: just create an .astro file in src/pages/
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { methodSteps } from '@data/methodSteps';
+
+const icons = {
+  search: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/>',
+  'home-check': '<path d="M3 12l9-9 9 9"/><path d="M5 10v11h14V10"/>',
+  document: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>',
+  sun: '<circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.49 8.49l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.49-8.49l2.83-2.83"/>',
+  check: '<polyline points="20 6 9 17 4 12"/>',
+  monitor: '<rect x="4" y="4" width="16" height="16" rx="2.5"/><line x1="4" y1="10" x2="20" y2="10"/><circle cx="8" cy="15" r="1.5"/>',
+};
+---
+
+<BaseLayout 
+  title="Sobre Solfy"
+  description="Conoce el método Solfy, nuestro equipo y cómo trabajamos para llevar energía solar a más de 2.000 hogares en toda España."
+>
+  <!-- Hero section -->
+  <section class="py-20 md:py-28 bg-bg">
+    <div class="container-custom">
+      <div class="eyebrow">
+        <span data-i18n="about.eyebrow">Sobre nosotros</span>
+      </div>
+      <h1 class="font-serif text-[clamp(2.6rem,7vw,4.8rem)] font-normal leading-[1.02] tracking-tight mb-6 text-ink max-w-[900px]" data-i18n="about.title">
+        Hacemos la energía solar <em class="italic gradient-text">accesible</em> para todos.
+      </h1>
+      <p class="text-lg text-ink-soft leading-relaxed max-w-[720px]" data-i18n="about.description">
+        Desde 2018, hemos instalado más de 2.000 sistemas solares en viviendas, comunidades y empresas. Nuestra misión es simple: hacer que la transición a la energía solar sea tan fácil que no tengas que pensar en ella.
+      </p>
+    </div>
+  </section>
+
+  <!-- Method section -->
+  <section id="method" class="py-20 md:py-28 bg-bg-soft">
+    <div class="container-custom">
+      <div class="section-head">
+        <div class="eyebrow">
+          <span data-i18n="about.method.eyebrow">El método Solfy</span>
+        </div>
+        <h2 class="font-serif text-[clamp(2.2rem,5vw,3.5rem)] font-normal leading-[1.05] tracking-tight text-ink mb-5" data-i18n="about.method.title">
+          Seis pasos. <em class="italic gradient-text">Ninguno tuyo</em>.
+        </h2>
+        <p class="text-lg text-ink-soft leading-relaxed" data-i18n="about.method.description">
+          Nos ocupamos de todo, desde el primer estudio hasta el último trámite. Tu único trabajo es disfrutar el ahorro.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-0">
+        {methodSteps.map((step, index) => (
+          <article class="grid grid-cols-[60px_1fr] md:grid-cols-[100px_80px_1fr_1.2fr] gap-6 md:gap-8 py-9 md:py-10 border-t border-line-soft items-start md:items-center relative group last:border-b">
+            {/* Top gradient line on hover */}
+            <div class="absolute left-0 right-0 top-0 h-px bg-gradient-brand scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
+            
+            {/* Number */}
+            <span class="font-serif italic text-[1.7rem] md:text-[2.2rem] text-brand-sage-deep font-normal">
+              {step.number}
+            </span>
+
+            {/* Icon (hidden on mobile) */}
+            <div class={`hidden md:flex w-15 h-15 rounded-full items-center justify-center ${
+              index % 3 === 0 ? 'bg-brand-yellow/18' :
+              index % 3 === 1 ? 'bg-brand-sage/22' :
+              'bg-brand-sky/18'
+            }`}>
+              <svg 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke-width="1.5" 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                class="w-6 h-6 stroke-ink"
+                aria-hidden="true"
+                set:html={icons[step.icon]}
+              />
+            </div>
+
+            {/* Title */}
+            <h3 class="font-serif text-2xl md:text-[1.55rem] font-normal tracking-tight text-ink col-start-2 md:col-start-3">
+              {step.title}
+            </h3>
+
+            {/* Description */}
+            <p class="text-[0.95rem] md:text-base text-ink-soft leading-relaxed col-start-2 md:col-start-4">
+              {step.description}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 md:py-24 bg-bg">
+    <div class="container-custom text-center">
+      <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] font-normal leading-tight tracking-tight mb-6 text-ink" data-i18n="about.cta.title">
+        ¿Listo para empezar?
+      </h2>
+      <p class="text-lg text-ink-soft mb-8 max-w-[600px] mx-auto" data-i18n="about.cta.description">
+        Solicita tu estudio personalizado gratuito y descubre cuánto puedes ahorrar.
+      </p>
+      <a href="/contact" class="btn-primary" data-i18n="about.cta.button">
+        Solicitar estudio gratuito
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

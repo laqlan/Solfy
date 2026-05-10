@@ -1,0 +1,251 @@
+---
+/**
+ * Homepage - gated client preview page with password access.
+ * Unlocks the full Solfy site once the correct access code is entered.
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import Press from '@components/Press.astro';
+import Solutions from '@components/Solutions.astro';
+import FAQ from '@components/FAQ.astro';
+import Testimonials from '@components/Testimonials.astro';
+import CTAFinal from '@components/CTAFinal.astro';
+import { siteConfig } from '@data/siteConfig';
+import { generateFAQSchema } from '@data/faq';
+
+const structuredData = generateFAQSchema();
+---
+
+<BaseLayout 
+  title="PureGrid Client Preview"
+  description="Acceso exclusivo para clientes. Introduce el código de acceso para continuar."
+  structuredData={structuredData}
+>
+  <div id="gate" class="gate">
+    <div class="gate-inner">
+      <div class="gate-logo"><span class="gate-logo-mark"></span>PureGrid</div>
+      <div class="gate-tag">Client Preview</div>
+      <h1 class="gate-headline" data-i18n="gate.headline">Una <em>previa</em> hecha a medida.</h1>
+      <p class="gate-sub" data-i18n="gate.subtitle">Esta demo ha sido preparada exclusivamente para Solfy.<br>Introduce el código de acceso para continuar.</p>
+      <form class="gate-form" id="gate-form" autocomplete="off">
+        <input type="text" id="gate-input" data-i18n-placeholder="gate.inputPlaceholder" autofocus autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit" data-i18n="gate.submit">Entrar</button>
+      </form>
+      <div class="gate-error" id="gate-error" data-i18n="gate.error">Código incorrecto. Vuelve a intentarlo.</div>
+    </div>
+    <div class="gate-foot">PureGrid · puregrid.es</div>
+  </div>
+
+  <div id="site-content" class="hidden">
+    <Hero />
+    <Press />
+    <Solutions />
+    <FAQ />
+    <Testimonials />
+    <CTAFinal />
+  </div>
+
+  <style is:global>
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+      background: radial-gradient(circle at top left, rgba(249,168,38,0.14), transparent 22%),
+                  radial-gradient(circle at bottom right, rgba(56,189,248,0.12), transparent 24%),
+                  linear-gradient(180deg, rgba(15,23,42,0.98), rgba(15,23,42,0.88));
+      color: white;
+      overflow: hidden;
+    }
+
+    .gate-inner {
+      width: min(100%, 560px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(15,23,42,0.94);
+      backdrop-filter: blur(18px);
+      padding: 3rem 2.5rem;
+      box-shadow: 0 40px 120px rgba(15,23,42,0.55);
+      text-align: center;
+    }
+
+    .gate-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .gate-logo-mark {
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #f59e0b, #fb923c);
+      box-shadow: 0 0 0 6px rgba(248,113,113,0.08);
+    }
+
+    .gate-tag {
+      margin-top: 0.75rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(248,180,30,0.85);
+      font-size: 0.675rem;
+    }
+
+    .gate-headline {
+      margin-top: 1.8rem;
+      font-size: clamp(2.75rem, 4vw, 4.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      font-family: 'DM Serif Display', serif;
+      color: white;
+    }
+
+    .gate-headline em {
+      font-style: italic;
+      color: #f59e0b;
+    }
+
+    .gate-sub {
+      margin-top: 1.5rem;
+      color: rgba(226,232,240,0.82);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .gate-form {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .gate-form input {
+      width: 100%;
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(15,23,42,0.9);
+      color: white;
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gate-form input:focus {
+      border-color: rgba(251,146,60,0.9);
+      box-shadow: 0 0 0 4px rgba(251,146,60,0.18);
+    }
+
+    .gate-form button {
+      border-radius: 9999px;
+      border: none;
+      padding: 1rem 1.6rem;
+      background: linear-gradient(135deg, #fb923c, #f97316);
+      color: #0f172a;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .gate-form button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .gate-error {
+      margin-top: 1rem;
+      color: #fb7185;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.2s ease, max-height 0.3s ease;
+    }
+
+    .gate-error.show {
+      opacity: 1;
+      max-height: 3rem;
+    }
+
+    .gate-hint {
+      margin-top: 1.5rem;
+      color: rgba(148,163,184,0.85);
+      font-size: 0.8rem;
+    }
+
+    .gate-hint code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+      color: #f8fafc;
+      background: rgba(255,255,255,0.08);
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.5rem;
+    }
+
+    .gate-foot {
+      margin-top: 2rem;
+      color: rgba(148,163,184,0.7);
+      font-size: 0.8rem;
+    }
+
+    body:not(.unlocked) header,
+    body:not(.unlocked) footer {
+      display: none !important;
+    }
+
+    body:not(.unlocked) #main-content {
+      min-height: 100vh;
+    }
+
+    body:not(.unlocked) #site-content {
+      display: none !important;
+    }
+
+    body.unlocked .gate {
+      display: none !important;
+    }
+  </style>
+
+  <script is:inline>
+    const PASSWORD = 'solfy2026';
+    const gate = document.getElementById('gate');
+    const gateForm = document.getElementById('gate-form');
+    const gateInput = document.getElementById('gate-input');
+    const gateError = document.getElementById('gate-error');
+    const siteContent = document.getElementById('site-content');
+
+    const unlock = () => {
+      document.body.classList.add('unlocked');
+      siteContent?.classList.remove('hidden');
+      if (gate) gate.style.display = 'none';
+    };
+
+    const lock = () => {
+      document.body.classList.remove('unlocked');
+      siteContent?.classList.add('hidden');
+      if (gate) gate.style.display = 'flex';
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lock();
+    });
+
+    gateForm?.addEventListener('submit', event => {
+      event.preventDefault();
+      gateError.classList.remove('show');
+      const value = gateInput?.value?.trim();
+      if (value === PASSWORD) {
+        unlock();
+      } else {
+        gateError.classList.add('show');
+        gateInput.value = '';
+        gateInput.focus();
+      }
+    });
+  </script>
+</BaseLayout>

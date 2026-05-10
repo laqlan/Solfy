@@ -1,0 +1,179 @@
+---
+/**
+ * Contact page - contact form and information.
+ * In production, this would integrate with a form handling service.
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { siteConfig } from '@data/siteConfig';
+---
+
+<BaseLayout 
+  title="Contacto"
+  description="Solicita tu estudio gratuito de instalación solar. Te llamamos en menos de 24 horas con una propuesta personalizada."
+>
+  <section class="py-20 md:py-28 bg-bg">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
+        <!-- Left column - Info -->
+        <div>
+          <div class="eyebrow">
+            <span data-i18n="contact.eyebrow">Hablemos</span>
+          </div>
+          <h1 class="font-serif text-[clamp(2.6rem,7vw,4.2rem)] font-normal leading-[1.02] tracking-tight mb-6 text-ink" data-i18n="contact.title">
+            Empieza con tu <em class="italic gradient-text">estudio gratuito</em>.
+          </h1>
+          <p class="text-lg text-ink-soft leading-relaxed mb-12" data-i18n="contact.description">
+            Cuéntanos sobre tu hogar o negocio y te contactamos en menos de 24 horas con una propuesta clara, sin compromiso.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-bg-soft flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand-sage-deep" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-ink mb-1" data-i18n="contact.info.phoneTitle">Teléfono</h3>
+                <a href={`tel:${siteConfig.phone}`} class="text-ink-soft hover:text-brand-sage-deep transition-colors">
+                  {siteConfig.phone.replace('+34', '+34 ')}
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-bg-soft flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand-sage-deep" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-ink mb-1" data-i18n="contact.info.emailTitle">Email</h3>
+                <a href={`mailto:${siteConfig.email}`} class="text-ink-soft hover:text-brand-sage-deep transition-colors">
+                  {siteConfig.email}
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-bg-soft flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand-sage-deep" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-ink mb-1" data-i18n="contact.info.hoursTitle">Horario</h3>
+                <p class="text-ink-soft" data-i18n="contact.info.hoursLine1">Lunes a viernes: 9:00 - 19:00</p>
+                <p class="text-ink-soft" data-i18n="contact.info.hoursLine2">Sábados: 10:00 - 14:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column - Form -->
+        <div class="bg-bg-soft rounded-card p-8 md:p-10">
+          <h2 class="font-serif text-2xl font-normal tracking-tight mb-6 text-ink">
+            Solicita tu estudio gratuito
+          </h2>
+          
+          <form class="space-y-5" method="POST" action="/api/contact">
+            <div>
+              <label for="name" class="block text-sm font-medium text-ink mb-2" data-i18n="contact.form.name">Nombre completo *</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                class="w-full px-4 py-3 rounded-2xl border border-line bg-bg text-ink focus:outline-none focus:border-brand-sage-deep transition-colors"
+                data-i18n-placeholder="contact.form.placeholder.name"
+                placeholder="Tu nombre"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-ink mb-2" data-i18n="contact.form.email">Email *</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                class="w-full px-4 py-3 rounded-2xl border border-line bg-bg text-ink focus:outline-none focus:border-brand-sage-deep transition-colors"
+                data-i18n-placeholder="contact.form.placeholder.email"
+                placeholder="tu@email.com"
+              />
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm font-medium text-ink mb-2" data-i18n="contact.form.phone">Teléfono *</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                required 
+                class="w-full px-4 py-3 rounded-2xl border border-line bg-bg text-ink focus:outline-none focus:border-brand-sage-deep transition-colors"
+                data-i18n-placeholder="contact.form.placeholder.phone"
+                placeholder="+34 600 000 000"
+              />
+            </div>
+
+            <div>
+              <label for="location" class="block text-sm font-medium text-ink mb-2" data-i18n="contact.form.location">Ubicación *</label>
+              <input 
+                type="text" 
+                id="location" 
+                name="location" 
+                required 
+                class="w-full px-4 py-3 rounded-2xl border border-line bg-bg text-ink focus:outline-none focus:border-brand-sage-deep transition-colors"
+                data-i18n-placeholder="contact.form.placeholder.location"
+                placeholder="Ciudad o código postal"
+              />
+            </div>
+
+            <div>
+              <label for="type" class="block text-sm font-medium text-ink mb-2" data-i18n="contact.form.type">Tipo de instalación *</label>
+              <select 
+                id="type" 
+                name="type" 
+                required 
+                class="w-full px-4 py-3 rounded-2xl border border-line bg-bg text-ink focus:outline-none focus:border-brand-sage-deep transition-colors"
+              >
+                <option value="" data-i18n="contact.form.placeholder.type">Selecciona una opción</option>
+                <option value="residential" data-i18n="contact.form.placeholder.optionResidential">Vivienda unifamiliar</option>
+                <option value="community" data-i18n="contact.form.placeholder.optionCommunity">Comunidad de vecinos</option>
+                <option value="business" data-i18n="contact.form.placeholder.optionBusiness">Empresa o industria</option>
+                <option value="other" data-i18n="contact.form.placeholder.optionOther">Otro</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-ink mb-2" data-i18n="contact.form.message">Mensaje (opcional)</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                class="w-full px-4 py-3 rounded-2xl border border-line bg-bg text-ink focus:outline-none focus:border-brand-sage-deep transition-colors resize-none"
+                data-i18n-placeholder="contact.form.placeholder.message"
+                placeholder="Cuéntanos más sobre tu proyecto..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="w-full btn-primary justify-center" data-i18n="contact.form.submit">
+              Enviar solicitud
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+
+            <p class="text-xs text-ink-mute text-center" data-i18n="contact.form.privacy">
+              Al enviar este formulario, aceptas nuestra <a href="/privacy" class="underline hover:text-brand-sage-deep">política de privacidad</a>.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

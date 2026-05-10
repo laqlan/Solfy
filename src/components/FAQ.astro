@@ -1,0 +1,105 @@
+---
+/**
+ * FAQ component - frequently asked questions accordion.
+ * Uses minimal client-side JavaScript for accordion functionality.
+ * Includes FAQ schema for SEO.
+ */
+
+import { faqItems } from '@data/faq';
+---
+
+<section id="faq" class="py-20 md:py-28 bg-bg-soft">
+  <div class="container-custom">
+    <!-- Section heading -->
+    <div class="section-head">
+      <div class="eyebrow">
+        <span data-i18n="faq.eyebrow">Resolvemos tus dudas</span>
+      </div>
+      <h2 class="font-serif text-[clamp(2.2rem,5vw,3.5rem)] font-normal leading-[1.05] tracking-tight text-ink mb-5" data-i18n="faq.title">
+        Antes de pedir el estudio, <em class="italic gradient-text">esto te interesa</em>.
+      </h2>
+      <p class="text-lg text-ink-soft leading-relaxed" data-i18n="faq.description">
+    </div>
+
+    <!-- FAQ list -->
+    <div class="max-w-[880px] flex flex-col gap-3">
+      {faqItems.map((item) => (
+        <article class="bg-bg rounded-2xl overflow-hidden transition-shadow duration-250 shadow-[0_2px_8px_rgba(42,58,58,0.03)] faq-item">
+          <button 
+            class="w-full bg-transparent border-0 p-6 md:p-7 text-left cursor-pointer flex justify-between items-center gap-4 font-serif text-lg md:text-xl font-normal text-ink tracking-tight leading-snug"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${item.id}`}
+          >
+            <span data-i18n={`faq.${item.id}.question`}>{item.question}</span>
+            
+            {/* Toggle icon */}
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-bg-soft flex items-center justify-center transition-all duration-250 relative faq-toggle" aria-hidden="true">
+              <span class="absolute w-3 h-0.5 bg-ink rounded-sm"></span>
+              <span class="absolute w-0.5 h-3 bg-ink rounded-sm transition-transform duration-250"></span>
+            </span>
+          </button>
+          
+          <div 
+            id={`faq-answer-${item.id}`}
+            class="max-h-0 overflow-hidden transition-all duration-400 ease-in-out faq-answer"
+            aria-hidden="true"
+          >
+            <div class="px-6 pb-6 md:px-7 md:pb-7 text-ink-soft text-[0.97rem] leading-relaxed" data-i18n={`faq.${item.id}.answer`}>
+              {item.answer}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // FAQ accordion functionality - minimal client-side JS
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const button = item.querySelector('button');
+    const answer = item.querySelector('.faq-answer');
+    const toggle = item.querySelector('.faq-toggle');
+    const verticalBar = toggle?.querySelector('span:last-child');
+
+    button?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      
+      // Close all other items
+      document.querySelectorAll('.faq-item').forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('open');
+          otherItem.querySelector('button')?.setAttribute('aria-expanded', 'false');
+          const otherAnswer = otherItem.querySelector('.faq-answer');
+          const otherToggle = otherItem.querySelector('.faq-toggle span:last-child');
+          if (otherAnswer) otherAnswer.style.maxHeight = '0';
+          otherAnswer?.setAttribute('aria-hidden', 'true');
+          if (otherToggle) otherToggle.style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Toggle current item
+      if (!isOpen) {
+        item.classList.add('open');
+        button.setAttribute('aria-expanded', 'true');
+        if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+        answer?.setAttribute('aria-hidden', 'false');
+        if (verticalBar) verticalBar.style.transform = 'rotate(90deg)';
+        if (toggle) toggle.style.background = 'linear-gradient(95deg, #e8d860 0%, #9bc4a0 50%, #7bc5dc 100%)';
+      } else {
+        item.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
+        if (answer) answer.style.maxHeight = '0';
+        answer?.setAttribute('aria-hidden', 'true');
+        if (verticalBar) verticalBar.style.transform = 'rotate(0deg)';
+        if (toggle) toggle.style.background = '';
+      }
+    });
+  });
+</script>
+
+<style>
+  .faq-item.open {
+    box-shadow: var(--tw-shadow-soft, 0 8px 30px rgba(42,58,58,0.06));
+  }
+</style>

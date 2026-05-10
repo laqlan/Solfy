@@ -1,0 +1,106 @@
+/**
+ * Global styles and Tailwind directives.
+ * Font imports, base resets, and utility classes.
+ */
+
+/* Self-hosted fonts for performance */
+@import '@fontsource/dm-sans/300.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/600.css';
+@import '@fontsource/dm-sans/700.css';
+@import '@fontsource/dm-serif-display/400.css';
+@import '@fontsource/dm-serif-display/400-italic.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased overflow-x-hidden;
+  }
+
+  ::selection {
+    @apply bg-brand-sage text-ink;
+  }
+
+  /* Focus visible styles for keyboard navigation */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-sage;
+  }
+}
+
+@layer components {
+  /* Container utility matching design system */
+  .container-custom {
+    @apply max-w-[1280px] mx-auto px-6 md:px-10;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-ink text-bg px-7 py-4 rounded-pill font-semibold text-[0.95rem] 
+           inline-flex items-center gap-2.5 transition-transform duration-200 
+           border-0 cursor-pointer font-sans relative overflow-hidden
+           hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-brand opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-primary:hover {
+    @apply text-ink;
+  }
+
+  .btn-primary:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-primary > * {
+    @apply relative z-10;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-ink px-6 py-4 rounded-pill font-semibold 
+           text-[0.95rem] border-[1.5px] border-ink inline-flex items-center 
+           gap-2 transition-all duration-200 font-sans cursor-pointer
+           hover:bg-ink hover:text-bg focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  /* Section heading styles */
+  .section-head {
+    @apply mb-14 max-w-[720px];
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] 
+           text-brand-sage-deep mb-6 font-semibold;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply w-[22px] h-0.5 bg-gradient-brand rounded-sm;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-[800ms] ease-out;
+  }
+
+  .reveal.in {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Gradient text utility */
+  .gradient-text {
+    @apply bg-gradient-brand bg-clip-text text-transparent;
+  }
+}

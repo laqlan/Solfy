@@ -1,0 +1,113 @@
+---
+/**
+ * Products page - detailed information about all solution types.
+ * Includes product schema for SEO.
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { solutions, generateProductSchema } from '@data/solutions';
+
+// Generate aggregate product schema
+const productSchemas = solutions.map(solution => generateProductSchema(solution));
+---
+
+<BaseLayout 
+  title="Soluciones solares"
+  description="Placas solares para viviendas unifamiliares, comunidades de vecinos y empresas. Instalación completa con garantía de hasta 25 años."
+  structuredData={{ '@graph': productSchemas }}
+>
+  <!-- Hero -->
+  <section class="py-20 md:py-28 bg-bg">
+    <div class="container-custom">
+      <div class="eyebrow">
+        <span data-i18n="products.hero.eyebrow">Nuestras soluciones</span>
+      </div>
+      <h1 class="font-serif text-[clamp(2.6rem,7vw,4.8rem)] font-normal leading-[1.02] tracking-tight mb-6 text-ink max-w-[900px]" data-i18n="products.hero.title">
+        La solución perfecta para <em class="italic gradient-text">tu tipo de instalación</em>.
+      </h1>
+      <p class="text-lg text-ink-soft leading-relaxed max-w-[720px]" data-i18n="products.hero.description">
+        Desde una pequeña vivienda unifamiliar hasta una gran instalación industrial. Diseñamos, instalamos y legalizamos tu sistema solar a medida.
+      </p>
+    </div>
+  </section>
+
+  <!-- Product details -->
+  {solutions.map((solution, index) => (
+    <section 
+      id={solution.id} 
+      class={`py-20 md:py-28 ${index % 2 === 0 ? 'bg-bg' : 'bg-bg-soft'}`}
+    >
+      <div class="container-custom">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+            <span class="font-serif italic text-base text-brand-sage-deep mb-4 block font-normal">
+              — {solution.number}
+            </span>
+            <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] font-normal leading-tight tracking-tight mb-5 text-ink">
+              {solution.title}
+            </h2>
+            <p class="text-lg text-ink-soft leading-relaxed mb-6">
+              {solution.description}
+            </p>
+            
+            <div class="space-y-4 mb-8">
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-brand-sage-deep flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <p class="text-ink-soft">Estudio personalizado gratuito adaptado a tu consumo</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-brand-sage-deep flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <p class="text-ink-soft">Gestión completa de subvenciones y trámites administrativos</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-brand-sage-deep flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <p class="text-ink-soft">Instalación en pocos días con garantía de hasta 25 años</p>
+              </div>
+            </div>
+
+            <a href="/contact" class="btn-primary">
+              Solicitar información
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class={`aspect-square rounded-card bg-gradient-to-br ${
+            index % 3 === 0 ? 'from-brand-yellow-soft to-brand-sage' :
+            index % 3 === 1 ? 'from-brand-sage to-brand-sky' :
+            'from-brand-sky to-brand-sage-deep'
+          } ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+            {/* Placeholder for product imagery */}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Final CTA -->
+  <section class="py-16 md:py-24 bg-bg-tint">
+    <div class="container-custom text-center">
+      <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] font-normal leading-tight tracking-tight mb-6 text-ink" data-i18n="products.cta.title">
+        ¿No estás seguro cuál necesitas?
+      </h2>
+      <p class="text-lg text-ink-soft mb-8 max-w-[600px] mx-auto" data-i18n="products.cta.description">
+        Hablemos. Analizamos tu caso y te recomendamos la mejor solución sin compromiso.
+      </p>
+      <a href="/contact" class="btn-primary" data-i18n="products.cta.button">
+        Hablar con un experto
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
